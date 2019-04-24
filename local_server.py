@@ -1,10 +1,15 @@
+import sys
+# Python 3 verification
+if sys.version_info < (3, 0):
+    print('Please use Python 3.')
+    sys.exit(1)
+
 import argparse
 from flask import Flask, jsonify, request
 import json
 import networkx as nx
 import os
 import random
-import sys
 
 app = Flask(__name__)
 
@@ -111,8 +116,6 @@ def scout():
         # on success
         if data['correct'][student][vertex]:
             ret_data['reports'][student] = data['bots'][vertex] > 0
-            # vertex cannot be scouted by student anymore
-            data['forbidden_scouts'][student].add(vertex)
         else:
             ret_data['reports'][student] = not (data['bots'][vertex] > 0)
 
