@@ -1,6 +1,7 @@
 import networkx as nx
 import random
 import math
+import operator
 # Put your solution here.
 
 # client.time: An integer value; the amount of time elapsed thus far.
@@ -20,22 +21,19 @@ def solve(client):
 
     all_students = list(range(1, client.students + 1))
     non_home = list(range(1, client.home)) + list(range(client.home + 1, client.v + 1))
-    stu_opinion = [client.scout(ele, non_home) for ele in all_students]
+    # dictionary to store the total number of "YES" for each vertex
     Yes_count = {}
-
     # store all vertices that contain a bot
     Yes_label = []
     # store all vertices that don't contain a bot
     No_label = []
 
     for ver in non_home:
-        counter = 0
-        for stu in all_students:
-            counter += stu_opinion[stu[ver]]
-        Yes_count[ver] = counter
-    sorted_count = sorted((key, value) for (key, value) in Yes_count.items())
-    # find the vertex which has most "YES"s
+        Yes_count[ver] = sum(client.scout(ver, all_students).values())
 
+    sorted_count = sorted(Yes_count.items(), key=operator.itemgetter(1), reverse=True)
+
+    # find the vertex which has the largest number of "YES"
     for tuple in sorted_count:
         if tuple[0] not in Yes_label and tuple[0] not in No_label:
             ver_num = tuple[0]
@@ -46,25 +44,21 @@ def solve(client):
             neighbour_edges = {}
             for nbr in client.G[ver_num]:
                 if nbr not in Yes_label and nbr not in No_label:
-                    neighbour_edges[ver_num] = client.G[ver_num][nbr]['weight']
-            sorted_edges = sorted((key, value) for (key, value) in neighbour_edges.items())
+                    assert nbr != ver_num
+                    neighbour_edges[nbr] = client.G[ver_num][nbr]['weight']
+            sorted_edges = sorted(neighbour_edges.items(), key=operator.itemgetter(1))
             nearest_neighbour = sorted_edges[0][0]
+            assert ver_num != nearest_neighbour
             known_bot = client.remote(ver_num, nearest_neighbour)
             if known_bot == 0:
                 No_label.append(ver_num)
             else:
                 No_label.append(ver_num)
+                assert nearest_neighbour not in Yes_label
                 Yes_label.append(nearest_neighbour)
-        if len(Yes_count) == client.bots:
+        if len(Yes_label) == client.bots:
             break
-    
-
-
-
-
-
-
-
+    assert len(Yes_label) == 5
 
     # Step1: locate all bots by labeling the graph
     # We can create 2 arrays Y_loc and N_loc (empty initially)
@@ -74,11 +68,11 @@ def solve(client):
 
 
 
-    client.scout(random.choice(non_home), all_students)
+    #client.scout(random.choice(non_home), all_students)
 
-    for _ in range(100):
-        u, v = random.choice(list(client.G.edges()))
-        client.remote(u, v)
+    #for _ in range(100):
+    #    u, v = random.choice(list(client.G.edges()))
+    #    client.remote(u, v)
 
     client.end()
     pass
