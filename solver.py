@@ -65,10 +65,14 @@ def solve(client):
     if client.home not in Yes_label:
         No_label.append(client.home)
     assert len(Yes_label) == 5 or (len(Yes_label) + len(No_label) == 100)
+    print(len(Yes_label), len(No_label))
 
     Tree_endpoint = [ele for ele in Yes_label]
+    print(Tree_endpoint)
+    print(client.home)
     if client.home not in Tree_endpoint:
         Tree_endpoint.append(client.home)
+    print(Tree_endpoint)
 
     # Step1: locate all bots by labeling the graph (done)
     # Step2: Once we precisely locate all bots on the graph, we can remote them in a fashion that has the minimum cost
@@ -80,8 +84,8 @@ def solve(client):
     assert appro_tree.has_node(client.home)
     print(appro_tree.nodes())
     print(appro_tree.edges())
-    assert appro_tree.__len__() == len(Tree_endpoint)
-    assert appro_tree.size() == len(Tree_endpoint) - 1
+    # assert appro_tree.__len__() == len(Tree_endpoint)
+    # assert appro_tree.size() == len(Tree_endpoint) - 1
     for ele in Tree_endpoint:
         assert appro_tree.has_node(ele)
     print(list(nx.edge_dfs(appro_tree, client.home)))
