@@ -90,7 +90,7 @@ def solve(client):
                 Yes_count[ver] = sum([Stu_weight[stu - 1] for stu in Yes_found.get(ver)])
             sorted_count = sorted(Yes_count.items(), key=operator.itemgetter(1), reverse=True)
             ranking = [place for (place, votes) in sorted_count]
-            print(sorted_count)
+            # print(sorted_count)
 
         if len(Yes_label) == client.bots or (len(Yes_label) + len(No_label) == 100):
             break
