@@ -15,8 +15,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/solver.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="256">
-              <caret line="66" column="32" lean-forward="true" selection-start-line="66" selection-start-column="32" selection-end-line="66" selection-end-column="32" />
+            <state relative-caret-position="-473">
+              <caret line="71" column="47" lean-forward="true" selection-start-line="71" selection-start-column="47" selection-end-line="71" selection-end-column="47" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
               </folding>
@@ -98,6 +98,11 @@
             <path>
               <item name="guavabot" type="b2602c69:ProjectViewProjectNode" />
               <item name="guavabot" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="guavabot" type="b2602c69:ProjectViewProjectNode" />
+              <item name="guavabot" type="462c0819:PsiDirectoryNode" />
+              <item name="eval_graphs" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="guavabot" type="b2602c69:ProjectViewProjectNode" />
@@ -198,12 +203,12 @@
     <frame x="104" y="209" width="1375" height="812" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16727273" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16727273" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32928476" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32928476" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -277,9 +282,6 @@
     </option>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/eval_graphs/singapore_1.json">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/../Downloads/hw10/hw10.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="497">
@@ -349,13 +351,24 @@
         <state relative-caret-position="-1335" />
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/eval_graphs/singapore_1.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eval_graphs/singapore_3.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/test_graphs/singapore_0.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3552" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/eval_graphs/singapore_0.json">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/solver.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="66" column="32" lean-forward="true" selection-start-line="66" selection-start-column="32" selection-end-line="66" selection-end-column="32" />
+        <state relative-caret-position="-473">
+          <caret line="71" column="47" lean-forward="true" selection-start-line="71" selection-start-column="47" selection-end-line="71" selection-end-column="47" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
           </folding>

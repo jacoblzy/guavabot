@@ -63,7 +63,7 @@ def solve(client):
                     # only consider neighbours with low prob of containing a bot
                     # print(Yes_count.get(nbr))
                     # avoid remoting to a node with high ranking
-                    if nbr != client.h and ranking.index(nbr) < client.students/2:
+                    if nbr != client.h and ranking.index(nbr) < client.students/1.8:
                         continue
                     neighbour_edges[nbr] = client.G[ver_num][nbr]['weight']
             sorted_edges = sorted(neighbour_edges.items(), key=operator.itemgetter(1))
@@ -85,11 +85,12 @@ def solve(client):
             # penalize bad students by decreasing their weights
             for bad_stu in penalty:
                 # Stu_weight is indexed from 1
-                Stu_weight[bad_stu - 1] = Stu_weight[bad_stu - 1] * 0.5
+                Stu_weight[bad_stu - 1] = Stu_weight[bad_stu - 1] * 0.9
             for ver in non_home:
                 Yes_count[ver] = sum([Stu_weight[stu - 1] for stu in Yes_found.get(ver)])
             sorted_count = sorted(Yes_count.items(), key=operator.itemgetter(1), reverse=True)
             ranking = [place for (place, votes) in sorted_count]
+            print(sorted_count)
 
         if len(Yes_label) == client.bots or (len(Yes_label) + len(No_label) == 100):
             break
