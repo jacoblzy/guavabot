@@ -1,5 +1,4 @@
 import networkx as nx
-import random
 import math
 import operator
 import networkx.algorithms.approximation
@@ -28,16 +27,31 @@ def solve(client):
     Yes_label = []
     # store all vertices that don't contain a bot
     No_label = []
+    # dictionary to store the students as values, who predict yes on some vertex
+    Yes_found = {}
+    # student's count(weight), decrease when they make wrong predictions
+    Stu_weight = [1.00 for _ in range(client.students)]
 
     for ver in non_home:
-        Yes_count[ver] = sum(client.scout(ver, all_students).values())
-
+        mydict = client.scout(ver, all_students)
+        Yes_found[ver] = [stu for (stu, pred) in mydict.items() if pred]
+        Yes_count[ver] = sum([Stu_weight[stu - 1] for stu in Yes_found.get(ver)])
+        assert Yes_count.get(ver) <= client.students
     sorted_count = sorted(Yes_count.items(), key=operator.itemgetter(1), reverse=True)
+    # print(sorted_count)
+    ranking = [place for (place, votes) in sorted_count]
 
     # find the vertex which has the largest number of "YES"
-    for tuple in sorted_count:
-        if tuple[0] not in Yes_label and tuple[0] not in No_label:
-            ver_num = tuple[0]
+    while len(Yes_label) + len(No_label) < 99:
+        # print(len(Yes_label))
+        # print(len(No_label))
+        myiter = iter(sorted_count)
+        next_tuple = next(myiter)
+        while next_tuple and next_tuple[0] in Yes_label or next_tuple[0] in No_label:
+            next_tuple = next(myiter)
+
+        if next_tuple[0] not in Yes_label and next_tuple[0] not in No_label:
+            ver_num = next_tuple[0]
             # generate a list sorted by neighbouring edge weights
             # pop up the shortest weight
             # if this edge is connected with a node that is very likely to contain a bot, (probability >= ?)
@@ -46,8 +60,14 @@ def solve(client):
             for nbr in client.G[ver_num]:
                 if len(Yes_label) + len(No_label) == 99 or (nbr not in Yes_label and nbr not in No_label):
                     assert nbr != ver_num
+                    # only consider neighbours with low prob of containing a bot
+                    # print(Yes_count.get(nbr))
+                    # avoid remoting to a node with high ranking
+                    if nbr != client.h and ranking.index(nbr) < client.students/2:
+                        continue
                     neighbour_edges[nbr] = client.G[ver_num][nbr]['weight']
             sorted_edges = sorted(neighbour_edges.items(), key=operator.itemgetter(1))
+            # print(sorted_edges)
             nearest_neighbour = sorted_edges[0][0]
             assert ver_num != nearest_neighbour
             known_bot = client.remote(ver_num, nearest_neighbour)
@@ -57,6 +77,19 @@ def solve(client):
                     Yes_label.append(nearest_neighbour)
                 if nearest_neighbour in No_label:
                     No_label.remove(nearest_neighbour)
+                # find students who predict "NO" on ver_num
+                penalty = [x for x in all_students if x not in Yes_found.get(ver_num)]
+            else:
+                # find students who predict "YES" on ver_num
+                penalty = [x for x in all_students if x in Yes_found.get(ver_num)]
+            # penalize bad students by decreasing their weights
+            for bad_stu in penalty:
+                # Stu_weight is indexed from 1
+                Stu_weight[bad_stu - 1] = Stu_weight[bad_stu - 1] * 0.5
+            for ver in non_home:
+                Yes_count[ver] = sum([Stu_weight[stu - 1] for stu in Yes_found.get(ver)])
+            sorted_count = sorted(Yes_count.items(), key=operator.itemgetter(1), reverse=True)
+            ranking = [place for (place, votes) in sorted_count]
 
         if len(Yes_label) == client.bots or (len(Yes_label) + len(No_label) == 100):
             break
@@ -84,8 +117,6 @@ def solve(client):
     assert appro_tree.has_node(client.home)
     print(appro_tree.nodes())
     print(appro_tree.edges())
-    # assert appro_tree.__len__() == len(Tree_endpoint)
-    # assert appro_tree.size() == len(Tree_endpoint) - 1
     for ele in Tree_endpoint:
         assert appro_tree.has_node(ele)
     print(list(nx.edge_dfs(appro_tree, client.home)))
@@ -93,42 +124,14 @@ def solve(client):
     post_order_edges.reverse()
     post_order_edges = [(b, a) for (a, b) in post_order_edges]
     print(post_order_edges)
+    cost = 0
     for (start, end) in post_order_edges:
         shortest_path = nx.shortest_path(client.G, start, end, weight='weight')
         i = 0
         while i < len(shortest_path) - 1:
             client.remote(shortest_path[i], shortest_path[i + 1])
+            cost += client.G[start][end]['weight']
             i = i + 1
-
-
-
-
-    M = nx.algorithms.approximation.steinertree.metric_closure(client.G)
-    H = M.subgraph(Tree_endpoint)
-    #print(H.nodes())
-    #print(H.edges())
-    mst = nx.minimum_spanning_tree(H, weight='distance')
-    #print(mst.nodes())
-    #print(mst.edges())
-    #T = client.G.edge_subgraph(mst_edges)
-
-    #print(T.nodes())
-    #print(T.edges())
-
-
-
-
-
-
-
-
-
-
-    #client.scout(random.choice(non_home), all_students)
-
-    #for _ in range(100):
-    #    u, v = random.choice(list(client.G.edges()))
-    #    client.remote(u, v)
-
+    assert cost == sum([client.G[u][v]['weight'] for (u, v) in appro_tree.edges()])
     client.end()
     pass

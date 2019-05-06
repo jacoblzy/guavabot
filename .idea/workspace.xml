@@ -15,8 +15,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/solver.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="171">
-              <caret line="86" column="6" selection-start-line="86" selection-start-column="6" selection-end-line="86" selection-end-column="6" />
+            <state relative-caret-position="256">
+              <caret line="66" column="32" lean-forward="true" selection-start-line="66" selection-start-column="32" selection-end-line="66" selection-end-column="32" />
               <folding>
                 <element signature="e#0#21#0" expanded="true" />
               </folding>
@@ -82,8 +82,8 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="100" />
-    <option name="y" value="313" />
+    <option name="x" value="104" />
+    <option name="y" value="209" />
     <option name="width" value="1375" />
     <option name="height" value="812" />
   </component>
@@ -98,6 +98,11 @@
             <path>
               <item name="guavabot" type="b2602c69:ProjectViewProjectNode" />
               <item name="guavabot" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="guavabot" type="b2602c69:ProjectViewProjectNode" />
+              <item name="guavabot" type="462c0819:PsiDirectoryNode" />
+              <item name="test_graphs" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="guavabot" type="b2602c69:ProjectViewProjectNode" />
@@ -190,7 +195,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="100" y="313" width="1375" height="812" extended-state="0" />
+    <frame x="104" y="209" width="1375" height="812" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16727273" />
@@ -329,10 +334,28 @@
     <entry file="file://$PROJECT_DIR$/test_graphs/singapore_21.json">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/test_graphs/telaviv_13.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-7059" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_graphs/toronto_26.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-7114" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_graphs/singapore_10.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1335" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test_graphs/singapore_0.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/solver.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="86" column="6" selection-start-line="86" selection-start-column="6" selection-end-line="86" selection-end-column="6" />
+        <state relative-caret-position="256">
+          <caret line="66" column="32" lean-forward="true" selection-start-line="66" selection-start-column="32" selection-end-line="66" selection-end-column="32" />
           <folding>
             <element signature="e#0#21#0" expanded="true" />
           </folding>
